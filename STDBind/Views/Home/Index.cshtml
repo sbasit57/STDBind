@@ -1,0 +1,87 @@
+﻿
+@{
+    <br /><br />
+    <label>Name</label>
+    var studentlist = ViewBag.StudentList as IEnumerable<SelectListItem>;
+
+        <div class="row">
+    <div class="container">
+            @Html.DropDownList("studentlist", studentlist, "Select list", new { @id = "btn", @class = "form-control" })
+            <label> Email </label> 
+            <input type="text" id="email" class="form-control" onchange="data" readonly="readonly"/>
+            <label>Phone Number</label>
+            <input type="text" id="phone"  class="form-control" onchange="data" readonly="readonly"/>
+        </div>
+    </div>
+ }
+
+
+
+@*<script type="text/javascript">
+    $(document).ready(function () {
+        debugger;
+        $("#btn").on("change", function () {
+
+            debugger;
+            var dropdown = document.getElementById("btn");
+            var selection = dropdown.value;
+
+
+            $.ajax({
+                type: "GET",
+                url: "/Home/GetData",
+                data: { name: selection }
+            });
+
+
+
+        });
+ </script>*@
+
+
+
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#btn").on("change", function () {
+
+            var dropdown = document.getElementById("btn");
+            var selection = dropdown.value;
+
+            //var stu = Object();
+            //stu.email = $('#email').val();
+            //stu.phone = $('#phone').val();
+            debugger;
+            $.ajax({
+                type: "POST",
+                url: "/Home/GetData",
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify({ Name: selection }),
+             
+                dataType: "json",
+
+                success: function (response) { 
+
+                    if (response != null) {
+                        // alert("email : " + response.email + ", Phone : " + response.phone + "Name  : " + response.Name);
+                        alert(response);
+
+
+                    } else {
+                        alert("Something went wrong");
+                    }  
+                  
+
+
+                }
+            });
+        });
+    });
+</script>
+
+
+
+
+
+
+
