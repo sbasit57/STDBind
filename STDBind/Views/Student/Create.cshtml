@@ -6,7 +6,6 @@
 
 <h2>Create</h2>
 
-
 @using (Html.BeginForm("create","Student",FormMethod.Post, new {enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
@@ -47,7 +46,7 @@
         </div>
     </div>
     <div class="form-group">
-        @Html.LabelFor(model => model.Filename, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.LabelFor(model => model.pdfname, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             <input type="file" name="PdfFile" required />
         </div>

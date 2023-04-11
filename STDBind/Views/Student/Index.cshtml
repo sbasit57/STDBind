@@ -87,9 +87,8 @@
             @Html.DisplayNameFor(model => model.phone_number)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Filename)
+            @Html.DisplayNameFor(model => model.pdfname)
         </th>
-        <th></th>
     </tr>
 
     @foreach (var item in Model)
@@ -108,7 +107,7 @@
                 @Html.DisplayFor(modelItem => item.phone_number)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Filename)
+                @Html.DisplayFor(modelItem => item.pdfname)
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |

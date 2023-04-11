@@ -13,7 +13,7 @@ namespace STDBind.Controllers
 {
     public class StudentController : Controller
     {
-        private StudentDbEntities1 db = new StudentDbEntities1();
+        StudentDbEntities1 db = new StudentDbEntities1();
 
         // GET: Student
         public ActionResult Index(int? id,string searchBy,string search)
@@ -69,19 +69,34 @@ namespace STDBind.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Name,Email,phone_number")] Student_tbl student_tbl,Student_tbl s)
+        /*[ValidateAntiForgeryToken]*/
+        public ActionResult Create(Student_tbl s)
         {
-            if (ModelState.IsValid)
+            /*if (ModelState.IsValid)
             {
                 db.Student_tbl.Add(student_tbl);
                 db.SaveChanges();
                 return RedirectToAction("Index");
-            }
+            }*/
             string filename = Path.GetFileNameWithoutExtension(s.PdfFile.FileName);
             string extension = Path.GetExtension(s.PdfFile.FileName);
-            filename = filename + extension; 
-            return View(student_tbl);
+            filename = filename + extension;
+            s.pdfname = "~/UserDocs/" + filename;
+            filename = Path.Combine(Server.MapPath("~/UserDocs/"),filename);
+            s.PdfFile.SaveAs(filename);
+            db.Student_tbl.Add(s);
+            db.SaveChanges();
+            //if (a> 0)
+            //{
+            //    ViewBag.Message = "<script>alert('Data Inserted Successfully !!!');</script>";
+            //    ModelState.Clear();
+            //}
+            //else
+            //{
+            //    ViewBag.Message = "<script>alert('Data Insertion Failed !!!');</script>";
+            //    ModelState.Clear();
+            //}
+            return View("Index");
         }
 
         // GET: Student/Edit/5
