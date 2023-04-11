@@ -5,23 +5,27 @@
 }
 
 <h2>Index</h2>
-
+@Html.Raw(TempData["CreateMessage"]);
+@Html.Raw(TempData["SizeMessage"])
+@Html.Raw(TempData["ExtensionMessage"])
 
 <style>
-.class1 {
-       align-content:center;
-       align-items:center;
-   }
+    .class1 {
+        align-content: center;
+        align-items: center;
+    }
+
     .right {
-        top:200px;
+        top: 200px;
         position: absolute;
         right: 300px;
         width: 300px;
         border: 3px solid #73AD21;
         padding: 12px;
     }
+
     .left {
-        top:200px;
+        top: 200px;
         position: absolute;
         left: 300px;
         width: 300px;
@@ -48,14 +52,14 @@
         <br />
         <div class="left class1">
 
-        @Html.RadioButton("searchBy", "Name")<strong>Name</strong>
-        @Html.RadioButton("searchBy", "Email")<strong>Email</strong>
-        <br />
-        @Html.TextBox("search", " ", new { @class = "form-control input1" })
-        <br />
-        <input type="submit" value="search" class="btn btn-primary input1" />
+            @Html.RadioButton("searchBy", "Name")<strong>Name</strong>
+            @Html.RadioButton("searchBy", "Email")<strong>Email</strong>
+            <br />
+            @Html.TextBox("search", " ", new { @class = "form-control input1" })
+            <br />
+            <input type="submit" value="search" class="btn btn-primary input1" />
 
-        <br />
+            <br />
         </div>
     }
 </p>

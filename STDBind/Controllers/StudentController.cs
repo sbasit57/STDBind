@@ -13,7 +13,7 @@ namespace STDBind.Controllers
 {
     public class StudentController : Controller
     {
-        StudentDbEntities1 db = new StudentDbEntities1();
+        private StudentDbEntities1 db = new StudentDbEntities1();
 
         // GET: Student
         public ActionResult Index(int? id,string searchBy,string search)
@@ -69,8 +69,8 @@ namespace STDBind.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        /*[ValidateAntiForgeryToken]*/
-        public ActionResult Create(Student_tbl s)
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(Student_tbl student_tbl)
         {
             /*if (ModelState.IsValid)
             {
@@ -78,14 +78,42 @@ namespace STDBind.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }*/
-            string filename = Path.GetFileNameWithoutExtension(s.PdfFile.FileName);
-            string extension = Path.GetExtension(s.PdfFile.FileName);
-            filename = filename + extension;
-            s.pdfname = "~/UserDocs/" + filename;
-            filename = Path.Combine(Server.MapPath("~/UserDocs/"),filename);
-            s.PdfFile.SaveAs(filename);
-            db.Student_tbl.Add(s);
-            db.SaveChanges();
+            if (ModelState.IsValid) { 
+            string filename = Path.GetFileNameWithoutExtension(student_tbl.PdfFile.FileName);
+            string extension = Path.GetExtension(student_tbl.PdfFile.FileName);
+                HttpPostedFileBase postedFile = student_tbl.PdfFile;
+                int length = postedFile.ContentLength;
+                if (extension.ToLower()==".pdf" || extension.ToLower()==".doc" || extension.ToLower() == ".docx" || extension.ToLower() == ".txt") {
+                    if (length <= 100000000)
+                    {
+                        filename = filename + extension;
+                        student_tbl.pdfname = "~/UserDocs/" + filename;
+                        filename = Path.Combine(Server.MapPath("~/UserDocs/"), filename);
+                        student_tbl.PdfFile.SaveAs(filename);
+                        db.Student_tbl.Add(student_tbl);
+                        int a = db.SaveChanges();
+
+                        if (a>0) {
+                            TempData["CreateMessage"] = "<script>alert('Data inserted successfully')</script>";
+                            ModelState.Clear();
+                            return RedirectToAction("Index","Student");
+                        
+                        }
+                        else {
+                            TempData["CreateMessage"] = "<script>alert('Data failed to insert')</script>";
+                        }
+                    }
+                    else
+                    {
+                        TempData["SizeMessage"] = "<script>alert('File should be less than 10mb')</script>";
+                    }
+                }
+                else
+                {
+                    TempData["ExtensionMessage"] = "<script>alert('Image format should only in pdf, doc, docx, txt')</script>";
+                }
+                
+            }
             //if (a> 0)
             //{
             //    ViewBag.Message = "<script>alert('Data Inserted Successfully !!!');</script>";
