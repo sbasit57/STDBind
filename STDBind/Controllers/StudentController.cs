@@ -88,7 +88,7 @@ namespace STDBind.Controllers
                 if (extension.ToLower()==".pdf" || extension.ToLower()==".doc" || extension.ToLower() == ".docx" || extension.ToLower() == ".txt") {
                     if (length <= 10000000)
                     {
-                        filename = filename + extension;
+                        filename += extension;
                         student_tbl.pdfname = "~/UserDocs/" + filename;
                         filename = Path.Combine(Server.MapPath("~/UserDocs/"), filename);
                         student_tbl.PdfFile.SaveAs(filename);
@@ -96,23 +96,23 @@ namespace STDBind.Controllers
                         int a = db.SaveChanges();
 
                         if (a>0) {
-                            TempData["CreateMessage"] = "<script>alert('Data inserted successfully')</script>";
+                            TempData["AlertMessage"] = "Record Inserted Successfully...!";
                             ModelState.Clear();
                             return RedirectToAction("Index","Student");
                         
                         }
                         else {
-                            TempData["CreateMessage"] = "<script>alert('Data failed to insert')</script>";
+                            TempData["AlertMessage"] = "Record Insertion Failed...!";
                         }
                     }
                     else
                     {
-                        TempData["SizeMessage"] = "<script>alert('File should be less than 10mb')</script>";
+                        TempData["AlertMessage"] = "File should be less than 10mb";
                     }
                 }
                 else
                 {
-                    TempData["ExtensionMessage"] = "<script>alert('File format should only in pdf, doc, docx, txt')</script>";
+                    TempData["AlertMessage"] = "File format not supported";
                 }
                 
             }
@@ -155,6 +155,7 @@ namespace STDBind.Controllers
             {
                 db.Entry(student_tbl).State = EntityState.Modified;
                 db.SaveChanges();
+                TempData["AlertMessage"] = "Record Updated Successfully...!";
                 return RedirectToAction("Index");
             }
             return View(student_tbl);
@@ -183,6 +184,7 @@ namespace STDBind.Controllers
             Student_tbl student_tbl = db.Student_tbl.Find(id);
             db.Student_tbl.Remove(student_tbl);
             db.SaveChanges();
+            TempData["AlertMessage"] = "Record deleted successfully...!";
             return RedirectToAction("Index");
         }
 

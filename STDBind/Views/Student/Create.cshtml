@@ -5,9 +5,15 @@
 }
 
 <h2>Create</h2>
-@Html.Raw(TempData["CreateMessage"])
-@Html.Raw(TempData["SizeMessage"])
-@Html.Raw(TempData["ExtensionMessage"])
+
+@if (TempData["AlertMessage"] != null)
+{
+    <div class="alert alert-danger">
+        <strong>Failed!</strong>
+        @TempData["AlertMessage"]
+    </div>
+
+}
 
 @using (Html.BeginForm("create", "Student", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
@@ -66,6 +72,8 @@
 }
 
 <div>
+    @Html.Raw(ViewBag.Message)
+    @ViewBag.Message
     @Html.ActionLink("Back to List", "Index")
 </div>
 
