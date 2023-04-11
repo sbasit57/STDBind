@@ -70,7 +70,9 @@ namespace STDBind.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Student_tbl student_tbl)
+        /*public ActionResult Create(Student_tbl student_tbl)*/
+        public ActionResult Create(/*[Bind(Include = "ID,Name,Email,phone_number,pdfname")]*/ Student_tbl student_tbl)
+
         {
             /*if (ModelState.IsValid)
             {
@@ -84,7 +86,7 @@ namespace STDBind.Controllers
                 HttpPostedFileBase postedFile = student_tbl.PdfFile;
                 int length = postedFile.ContentLength;
                 if (extension.ToLower()==".pdf" || extension.ToLower()==".doc" || extension.ToLower() == ".docx" || extension.ToLower() == ".txt") {
-                    if (length <= 100000000)
+                    if (length <= 10000000)
                     {
                         filename = filename + extension;
                         student_tbl.pdfname = "~/UserDocs/" + filename;
@@ -110,7 +112,7 @@ namespace STDBind.Controllers
                 }
                 else
                 {
-                    TempData["ExtensionMessage"] = "<script>alert('Image format should only in pdf, doc, docx, txt')</script>";
+                    TempData["ExtensionMessage"] = "<script>alert('File format should only in pdf, doc, docx, txt')</script>";
                 }
                 
             }
@@ -147,7 +149,7 @@ namespace STDBind.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Name,Email,phone_number")] Student_tbl student_tbl)
+        public ActionResult Edit(/*[Bind(Include = "ID,Name,Email,phone_number")]*/ Student_tbl student_tbl)
         {
             if (ModelState.IsValid)
             {

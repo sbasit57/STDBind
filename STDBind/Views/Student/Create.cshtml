@@ -53,6 +53,7 @@
             @Html.LabelFor(model => model.pdfname, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <input type="file" name="PdfFile" required />
+                @Html.ValidationMessageFor(model => model.pdfname, "", new { @class = "text-danger" })
             </div>
         </div>
 
