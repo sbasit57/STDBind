@@ -155,7 +155,6 @@ namespace STDBind.Controllers
             {
                 db.Entry(student_tbl).State = EntityState.Modified;
                 db.SaveChanges();
-                TempData["AlertMessage"] = "Record Updated Successfully...!";
                 return RedirectToAction("Index");
             }
             return View(student_tbl);
@@ -184,7 +183,6 @@ namespace STDBind.Controllers
             Student_tbl student_tbl = db.Student_tbl.Find(id);
             db.Student_tbl.Remove(student_tbl);
             db.SaveChanges();
-            TempData["AlertMessage"] = "Record deleted successfully...!";
             return RedirectToAction("Index");
         }
 

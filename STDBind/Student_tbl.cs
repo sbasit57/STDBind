@@ -20,6 +20,7 @@ namespace STDBind
         public string Email { get; set; }
         public Nullable<int> phone_number { get; set; }
         public string pdfname { get; set; }
+
         public HttpPostedFileBase PdfFile { get; set; }
     }
 }
