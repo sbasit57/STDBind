@@ -14,6 +14,9 @@
           <Property Name="Email" Type="nvarchar" MaxLength="50" />
           <Property Name="phone number" Type="int" />
           <Property Name="pdfname" Type="nvarchar" MaxLength="50" />
+          <Property Name="fname" Type="nvarchar" MaxLength="50" />
+          <Property Name="lname" Type="nvarchar" MaxLength="50" />
+          <Property Name="password" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityContainer Name="StudentDbModel1StoreContainer">
           <EntitySet Name="Student_tbl" EntityType="Self.Student_tbl" Schema="dbo" store:Type="Tables" />
@@ -31,6 +34,9 @@
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="phone_number" Type="Int32" />
           <Property Name="pdfname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="lname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityContainer Name="StudentDbEntities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Student_tbl" EntityType="Self.Student_tbl" />
@@ -44,6 +50,9 @@
           <EntitySetMapping Name="Student_tbl">
             <EntityTypeMapping TypeName="StudentDbModel1.Student_tbl">
               <MappingFragment StoreEntitySet="Student_tbl">
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="lname" ColumnName="lname" />
+                <ScalarProperty Name="fname" ColumnName="fname" />
                 <ScalarProperty Name="pdfname" ColumnName="pdfname" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
