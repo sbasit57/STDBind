@@ -257,6 +257,7 @@
     <Content Include="Views\Login\_LayoutPage1.cshtml" />
     <Content Include="Views\Login\login.cshtml" />
     <Content Include="Views\SignupLogin\Signup.cshtml" />
+    <Content Include="Views\SignupLogin\login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

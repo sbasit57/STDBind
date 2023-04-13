@@ -9,7 +9,7 @@ namespace STDBind.Controllers
     public class SignupLoginController : Controller
     {
         // GET: SignupLogin
-        public ActionResult Index()
+        public ActionResult login()
         {
             return View();
         }
