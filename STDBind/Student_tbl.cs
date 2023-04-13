@@ -18,13 +18,26 @@ namespace STDBind
     public partial class Student_tbl
     {
         public int ID { get; set; }
+
+        [Display(Name =("First  Name"))]
+        [Required(ErrorMessage = "First Name is required")]
         public string fname { get; set; }
+
+        [Display(Name = ("Last  Name"))]
+        [Required(ErrorMessage = "Last Name is required")]
         public string lname { get; set; }
 
         [Display(Name = ("Username"))]
         [Required(ErrorMessage = "Username is required")]
         public string Name { get; set; }
+
+        
+        [Display(Name = ("Email"))]
+        [Required(ErrorMessage = "Email is required")]
         public string Email { get; set; }
+
+        [Display(Name = ("Phone Number"))]
+        [Required(ErrorMessage = "Phone number is required")]
         public Nullable<int> phone_number { get; set; }
         public string pdfname { get; set; }
         public HttpPostedFileBase PdfFile { get; set; }
@@ -32,5 +45,11 @@ namespace STDBind
         [Display(Name = "Password")]
         [Required(ErrorMessage = "Password is required")]
         public string password { get; set; }
+        [Display(Name = ("Confirm Password"))]
+        [DataType(DataType.Password)]
+        [Required(ErrorMessage = "Confirm Password")]
+        [Compare("Password",ErrorMessage ="Your password is not identical")]
+        public string confirm_password { get; set; }
+
     }
 }
