@@ -27,13 +27,13 @@
 
                     <tr>
                         <td>
-                        @Html.LabelFor(model => model.Password)
+                            @Html.LabelFor(model => model.Password)
                         </td>
                         <td>
                             @Html.TextBoxFor(model => model.Password, new { @class = "form-control , login__input " })
                         </td>
                         <td>
-                            @Html.ValidationMessageFor(model => model.Password, "" , new { @class = "login__input , password" })
+                            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "login__input , password" })
                         </td>
                         <td>
                             @ViewBag.FailedMessage
@@ -50,6 +50,9 @@
                 <span class="screen__background__shape screen__background__shape3"></span>
                 <span class="screen__background__shape screen__background__shape2"></span>
             }
+            <div>
+                @Html.ActionLink("Sign Up Now", "Signup", "SignupLogin")
+            </div>
 
         </div>
 
